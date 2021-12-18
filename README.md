@@ -7,8 +7,10 @@ Please note, that this was built as a fun project, isn't cleaned up and done qui
 
 ## Prerequisites:
 
+The following tools / runtimes need to be installed.
+
 * .NET 5.0
-* Chrome being installed
+* Chrome
 
 
 ## pre-built binaries
