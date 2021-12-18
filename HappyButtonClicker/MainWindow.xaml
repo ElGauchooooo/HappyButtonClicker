@@ -1,0 +1,118 @@
+﻿<Window x:Class="HappyButtonClicker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Happy Button Clicker" 
+        Height="300" 
+        Width="800"
+        ResizeMode="NoResize">
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="/Resources/#Sniglet" />
+        </Style>
+    </Window.Style>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            FontSize="30"
+            Width="600"
+            Foreground="#E42217"
+            TextWrapping="Wrap" 
+            Grid.Row="0" 
+            TextAlignment="Center"
+            VerticalAlignment="Center">
+            Where are the happy buttons?
+        </TextBlock>
+
+        <TextBox Grid.Row="1"
+                 Width="600" 
+                 Height="40" 
+                 Padding="10" 
+                 Name="RootUrl" 
+                 FontSize="14" 
+                 BorderBrush="#E42217"
+                 BorderThickness="3">
+            <TextBox.Style>
+
+                <Style BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="Padding" Value="1"/>
+                    <Setter Property="AllowDrop" Value="true"/>
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border x:Name="bg" BorderBrush="#858585" BorderThickness="3" CornerRadius="3">
+                                    <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" TargetName="bg" Value="#E42217"/>
+                                        <Setter Property="BorderThickness" TargetName="bg" Value="3"/>
+                                    </Trigger>
+
+                                    <Trigger Property="IsFocused" Value="True">
+                                        <Setter Property="BorderBrush" TargetName="bg" Value="#E42217"/>
+                                        <Setter Property="BorderThickness" TargetName="bg" Value="3"/>
+                                    </Trigger>
+
+
+                                    <Trigger Property="IsFocused" Value="False">
+                                        <Setter Property="BorderBrush" TargetName="bg" Value="#858585"/>
+                                        <Setter Property="BorderThickness" TargetName="bg" Value="3"/>
+                                    </Trigger>
+
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="BorderBrush" TargetName="bg" Value="#858585"/>
+                                        <Setter Property="BorderThickness" TargetName="bg" Value="3"/>
+                                    </Trigger>
+
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+            </TextBox.Style>
+
+        </TextBox>
+
+        <Button 
+            Click="ClickButtons" 
+            Grid.Row="2" 
+            Width="400"
+            Height="50"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            FontSize="20"
+            FontWeight="Normal"
+            FontStyle="Italic"
+            Background="White"
+            Foreground="Black"
+            BorderBrush="#E42217"   
+            Name="ClickButton"
+            BorderThickness="3">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <TextBlock
+            FontSize="15"
+            Width="600"
+            TextWrapping="Wrap"
+            Grid.Row="3">
+            HappyButtonClicker is a very professional tool to click buttons on german websites, that are based on Ember.
+            The current order of elements to be clicked is just for test purposes.
+            Sources can be found at <Hyperlink NavigateUri="https://github.com/ElGauchooooo/HappyButtonClicker" Name="GithubLink">github</Hyperlink>.
+        </TextBlock>
+    </Grid>
+</Window>

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Sniglet-ExtraBold.ttf" />
+    <None Remove="Resources\Sniglet-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PuppeteerSharp" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Sniglet-ExtraBold.ttf" />
+    <Resource Include="Resources\Sniglet-Regular.ttf" />
+  </ItemGroup>
+
+</Project>
