@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using PuppeteerSharp;
 
@@ -11,15 +13,19 @@ namespace HappyButtonClicker
 
         public async Task<ClickResult> StartClicking(string rootUrl, string followUpUrl = null)
         {
+            ClearLog();
+            Log("Starting");
             try
             {
                 await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
+                Log("Downloaded");
                 var browser = await Puppeteer.LaunchAsync(new LaunchOptions
                 {
                     Headless = false,
                     DefaultViewport = null
                 });
 
+                Log("CreatedBrowser");
                 var page = await browser.NewPageAsync();
                 if (!await page.NavigateAndWait(rootUrl))
                     return ClickResult.NetworkIssue;
@@ -90,6 +96,16 @@ namespace HappyButtonClicker
             {
                 return ClickResult.UserAbort;
             }
+        }
+
+        private void ClearLog()
+        {
+            File.WriteAllText("log.txt", "");
+        }
+
+        private void Log(string toLog)
+        {
+            File.AppendAllLines("log.txt", new List<string>{ toLog });
         }
 
 
@@ -220,6 +236,10 @@ namespace HappyButtonClicker
             var bannerHandles = await frame.QuerySelectorAllAsync(".banner-wrapper.is-unlocked");
             if (bannerHandles.Any())
                 return bannerHandles.First();
+
+            var explorerHandles = await frame.QuerySelectorAllAsync(".explorer-trigger.is-unlocked:not(.is-completed)");
+            if (explorerHandles.Any())
+                return explorerHandles.First();
 
             var flashCardHandles = await frame.QuerySelectorAllAsync(".content-region article.flash-card:not(.flash-card-flipped) .flash-card-side");
             if (flashCardHandles.Any())
